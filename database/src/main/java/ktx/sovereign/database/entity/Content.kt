@@ -1,12 +1,14 @@
 package ktx.sovereign.database.entity
 
-import android.provider.BaseColumns
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import ktx.sovereign.database.provider.SchemaInfo
+import kotlinx.android.parcel.Parcelize
+import ktx.sovereign.database.SchemaInfo
 
 @Entity(tableName = SchemaInfo.Content.TableName)
+@Parcelize
 data class Content(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = SchemaInfo.Content.PrimaryKey) val id: String,
@@ -14,4 +16,4 @@ data class Content(
     @ColumnInfo(name = SchemaInfo.Content.Path) val path: String,
     @ColumnInfo(name = SchemaInfo.Content.ApplicationToken) val token: String,
     @ColumnInfo(name = SchemaInfo.Content.Checksum) var checksum: String
-)
+) : Parcelable

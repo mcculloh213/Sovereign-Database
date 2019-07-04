@@ -1,4 +1,8 @@
 package ktx.sovereign.database.dao
 
-interface MessageDao {
+import androidx.room.Dao
+import ktx.sovereign.database.entity.Message
+
+@Dao
+interface MessageDao : BaseDao<Message>{
 }

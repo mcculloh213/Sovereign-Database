@@ -1,4 +1,8 @@
 package ktx.sovereign.database.dao
 
-interface KeywordDao {
+import androidx.room.Dao
+import ktx.sovereign.database.entity.Keyword
+
+@Dao
+interface KeywordDao : BaseDao<Keyword> {
 }

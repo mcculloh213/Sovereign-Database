@@ -1,11 +1,14 @@
 package ktx.sovereign.database.entity
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import ktx.sovereign.database.provider.SchemaInfo
+import kotlinx.android.parcel.Parcelize
+import ktx.sovereign.database.SchemaInfo
 
 @Entity(tableName = SchemaInfo.Media.TableName)
+@Parcelize
 data class Media(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = SchemaInfo.Media.PrimaryKey) val id: Long,
@@ -19,4 +22,4 @@ data class Media(
     @ColumnInfo(name = SchemaInfo.Media.Size) val size: Int,
     @ColumnInfo(name = SchemaInfo.Media.Title) var title: String,
     @ColumnInfo(name = SchemaInfo.Media.Width) val width: Int
-)
+) : Parcelable

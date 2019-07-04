@@ -1,14 +1,20 @@
 package ktx.sovereign.database.fts
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.Fts4
+import android.os.Parcelable
+import androidx.room.*
+import kotlinx.android.parcel.Parcelize
 import ktx.sovereign.database.entity.Note
-import ktx.sovereign.database.provider.SchemaInfo
+import ktx.sovereign.database.SchemaInfo
 
-@Fts4(contentEntity = Note::class)
 @Entity(tableName = SchemaInfo.NoteFts.TableName)
+@Fts4(
+    contentEntity = Note::class,
+    tokenizer = FtsOptions.TOKENIZER_PORTER
+)
+@Parcelize
 class NoteFts (
+    @PrimaryKey
+    @ColumnInfo(name = SchemaInfo.NoteFts.PrimaryKey) val rowid: Int,
     @ColumnInfo(name = SchemaInfo.Note.Title) val title: String,
     @ColumnInfo(name = SchemaInfo.Note.Body) val body: String
-)
+) : Parcelable

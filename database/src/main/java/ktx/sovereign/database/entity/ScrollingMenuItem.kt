@@ -3,7 +3,7 @@ package ktx.sovereign.database.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import ktx.sovereign.database.provider.SchemaInfo
+import ktx.sovereign.database.SchemaInfo
 
 @Entity(tableName = SchemaInfo.ScrollingMenuItem.TableName)
 data class ScrollingMenuItem(

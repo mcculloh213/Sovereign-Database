@@ -5,7 +5,7 @@ import android.content.ContentValues
 import android.content.UriMatcher
 import android.database.Cursor
 import android.net.Uri
-import ktx.sovereign.database.entity.Note
+import ktx.sovereign.database.SchemaInfo
 
 class EntityProvider : ContentProvider() {
     companion object {

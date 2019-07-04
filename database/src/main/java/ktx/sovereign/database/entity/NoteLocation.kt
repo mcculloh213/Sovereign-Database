@@ -3,7 +3,7 @@ package ktx.sovereign.database.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
-import ktx.sovereign.database.provider.SchemaInfo
+import ktx.sovereign.database.SchemaInfo
 
 @Entity(
     tableName = SchemaInfo.NoteLocation.TableName,
@@ -15,12 +15,16 @@ import ktx.sovereign.database.provider.SchemaInfo
         ForeignKey(
             entity = Note::class,
             parentColumns = [SchemaInfo.Note.PrimaryKey],
-            childColumns = [SchemaInfo.NoteLocation.Note]
+            childColumns = [SchemaInfo.NoteLocation.Note],
+            onUpdate = ForeignKey.CASCADE,
+            onDelete = ForeignKey.CASCADE
         ),
         ForeignKey(
-            entity = GeoLocation::class,
-            parentColumns = [SchemaInfo.GeoLocation.PrimaryKey],
-            childColumns = [SchemaInfo.NoteLocation.Location]
+            entity = Geolocation::class,
+            parentColumns = [SchemaInfo.Geolocation.PrimaryKey],
+            childColumns = [SchemaInfo.NoteLocation.Location],
+            onUpdate = ForeignKey.CASCADE,
+            onDelete = ForeignKey.CASCADE
         )
     ]
 )

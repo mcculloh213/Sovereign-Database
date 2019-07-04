@@ -1,4 +1,8 @@
 package ktx.sovereign.database.dao
 
-interface DocumentDao {
+import androidx.room.Dao
+import ktx.sovereign.database.entity.Document
+
+@Dao
+interface DocumentDao : BaseDao<Document> {
 }

@@ -1,11 +1,14 @@
 package ktx.sovereign.database.entity
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import ktx.sovereign.database.provider.SchemaInfo
+import kotlinx.android.parcel.Parcelize
+import ktx.sovereign.database.SchemaInfo
 
 @Entity(tableName = SchemaInfo.Document.TableName)
+@Parcelize
 data class Document(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = SchemaInfo.Document.PrimaryKey) val id: Long,
@@ -13,4 +16,4 @@ data class Document(
     @ColumnInfo(name = SchemaInfo.Document.FileName) var filename: String,
     @ColumnInfo(name = SchemaInfo.Document.MimeType) val mime: String,
     @ColumnInfo(name = SchemaInfo.Document.IsLocal) var isLocal: Boolean = false
-)
+) : Parcelable

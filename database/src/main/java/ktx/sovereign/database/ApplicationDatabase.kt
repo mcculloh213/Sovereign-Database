@@ -4,26 +4,41 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import ktx.sovereign.database.dao.*
 import ktx.sovereign.database.entity.*
+import ktx.sovereign.database.fts.NoteFts
 
 @Database(
     entities = [
         Content::class,
         Document::class,
-        GeoLocation::class,
+        Geolocation::class,
+        Image::class,
         Keyword::class,
         Message::class,
+        MetaTag::class,
         Note::class,
+        NoteFts::class,
         NoteLocation::class,
         NoteMedia::class,
-        ScrollingMenuItem::class
+        NoteTag::class,
+        ScrollingMenuItem::class,
+        Volume::class
     ],
+    exportSchema = true,
     version = 1
 )
 abstract class ApplicationDatabase : RoomDatabase() {
-    abstract fun NoteDao()
-    abstract fun MessageDao()
-    abstract fun ScrollingMenuItemDao()
+    abstract fun ContentDao(): ContentDao
+    abstract fun DocumentDao(): DocumentDao
+    abstract fun GeolocationDao(): GeolocationDao
+    abstract fun ImageDao(): ImageDao
+    abstract fun KeywordDao(): KeywordDao
+    abstract fun MessageDao(): MessageDao
+    abstract fun MetaTagDao(): MetaTagDao
+    abstract fun NoteDao(): NoteDao
+    abstract fun ScrollingMenuItemDao(): ScrollingMenuItemDao
+    abstract fun VolumeDao(): VolumeDao
 
     companion object {
         @Volatile

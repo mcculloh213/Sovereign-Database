@@ -1,9 +1,15 @@
-package ktx.sovereign.database.provider
+package ktx.sovereign.database
 
 import android.provider.BaseColumns
 import android.provider.MediaStore
 
 object SchemaInfo {
+    class Audio {
+        companion object SCHEMA {
+            const val TableName: String = "audio"
+            const val PrimaryKey: String = BaseColumns._ID
+        }
+    }
     class Content {
         companion object SCHEMA {
             const val TableName: String = "content"
@@ -24,7 +30,7 @@ object SchemaInfo {
             const val IsLocal: String = "is_local"
         }
     }
-    class GeoLocation {
+    class Geolocation {
         companion object SCHEMA {
             const val TableName: String = "locations"
             const val PrimaryKey: String = BaseColumns._ID
@@ -33,6 +39,14 @@ object SchemaInfo {
             const val Altitude: String = "altitude"
             const val Description: String = "description"
             const val Timestamp: String = "_ts"
+        }
+    }
+    class Image {
+        companion object SCHEMA {
+            const val TableName: String = "images"
+            const val PrimaryKey: String = BaseColumns._ID
+            const val DisplayName: String = MediaStore.MediaColumns.DISPLAY_NAME
+            const val Path: String = "_path"
         }
     }
     class Keyword {
@@ -71,6 +85,14 @@ object SchemaInfo {
             const val Timestamp: String = "_ts"
         }
     }
+    class MetaTag {
+        companion object SCHEMA {
+            const val TableName: String = "_metadata"
+            const val PrimaryKey: String = BaseColumns._ID
+            const val Key: String = "_key"
+            const val Value: String = "_value"
+        }
+    }
     class Note {
         companion object SCHEMA {
             const val TableName: String = "notes"
@@ -85,6 +107,7 @@ object SchemaInfo {
     class NoteFts {
         companion object SCHEMA {
             const val TableName: String = "fts_notes"
+            const val PrimaryKey: String = "rowid"
         }
     }
     class NoteLocation {
@@ -96,9 +119,17 @@ object SchemaInfo {
     }
     class NoteMedia {
         companion object SCHEMA {
-            const val TableName: String = ""
+            const val TableName: String = "note_media"
             const val Note: String = "_note"
             const val Media: String = "_media"
+        }
+    }
+    class NoteTag {
+        companion object SCHEMA {
+            const val TableName: String = "note_tags"
+            const val PrimaryKey: String = BaseColumns._ID
+            const val Note: String = "_note"
+            const val Tag: String = "_meta"
         }
     }
     class ScrollingMenuItem {
@@ -112,6 +143,21 @@ object SchemaInfo {
             const val Icon: String = "_icon"
             const val Tint: String = "_tint"
             const val Ordinal: String = "ordinal"
+        }
+    }
+    class Video {
+        companion object SCHEMA {
+            const val TableName: String = "videos"
+            const val PrimaryKey: String = BaseColumns._ID
+        }
+    }
+    class Volume {
+        companion object SCHEMA {
+            const val TableName: String = "volumes"
+            const val PrimaryKey: String = BaseColumns._ID
+            const val Name: String = "name"
+            const val Description: String = "description"
+            const val Token: String = "_token"
         }
     }
 }
