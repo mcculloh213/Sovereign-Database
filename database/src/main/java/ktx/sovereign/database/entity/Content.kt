@@ -7,8 +7,8 @@ import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 import ktx.sovereign.database.SchemaInfo
 
-@Entity(tableName = SchemaInfo.Content.TableName)
 @Parcelize
+@Entity(tableName = SchemaInfo.Content.TableName)
 data class Content(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = SchemaInfo.Content.PrimaryKey) val id: String,

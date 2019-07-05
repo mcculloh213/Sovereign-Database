@@ -1,21 +1,19 @@
 package ktx.sovereign.database.dao
 
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Update
+import androidx.room.*
 
-interface BaseDao<T> {
+@Dao
+abstract class BaseDao<T> {
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    suspend fun insert(obj: T): Long
+    abstract fun insert(obj: T): Long
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    suspend fun insert(vararg obj: T): List<Long>
+    abstract fun insert(vararg obj: T): List<Long>
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsert(obj: T): Long
+    abstract fun upsert(obj: T): Long
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsert(vararg obj: T): Long
+    abstract fun upsert(vararg obj: T): List<Long>
     @Update
-    suspend fun update(vararg obj: T): Int
+    abstract fun update(vararg obj: T): Int
     @Delete
-    suspend fun delete(vararg obj: T): Int
+    abstract fun delete(vararg obj: T): Int
 }

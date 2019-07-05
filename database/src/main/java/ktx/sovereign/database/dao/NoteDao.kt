@@ -7,25 +7,34 @@ import ktx.sovereign.database.entity.*
 import ktx.sovereign.database.relation.BadgerNote
 
 @Dao
-abstract class NoteDao : BaseDao<Note> {
+abstract class NoteDao : BaseDao<Note>() {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract suspend fun upsertMedia(media: Image): Long
+    abstract fun upsertMedia(media: Image): Long
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    abstract suspend fun insertNoteMedia(relation: NoteMedia)
+    abstract fun insertNoteMedia(relation: NoteMedia)
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract suspend fun upsertLocation(location: Geolocation): Long
+    abstract fun upsertLocation(location: Geolocation): Long
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    abstract suspend fun insertNoteLocation(relation: NoteLocation)
+    abstract fun insertNoteLocation(relation: NoteLocation)
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract suspend fun upsertTag(tag: MetaTag): Long
+    abstract fun upsertTag(tag: MetaTag): Long
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    abstract suspend fun insertNoteTag(relation: NoteTag)
+    abstract fun insertNoteTag(relation: NoteTag)
+
+    @Delete
+    abstract fun deleteNoteMedia(relation: NoteMedia): Int
+    @Delete
+    abstract fun deleteNoteLocation(relation: NoteLocation): Int
+    @Delete
+    abstract fun deleteNoteTag(relation: NoteTag): Int
 
     @Query("SELECT * FROM notes WHERE _id = :id")
-    abstract suspend fun getNote(id: Long): Note?
+    abstract fun getNote(id: Long): Note?
     @Query ("SELECT COUNT(*) FROM notes")
-    abstract suspend fun count(): Int
+    abstract fun count(): Int
 
+    @Query("SELECT * FROM notes")
+    abstract fun getAll(): List<Note>
     @Query("SELECT * FROM notes")
     abstract fun getAllNotes(): LiveData<List<Note>>
     @Query("DELETE FROM notes")
@@ -43,22 +52,22 @@ abstract class NoteDao : BaseDao<Note> {
         LEFT OUTER JOIN note_media ON images._id = note_media._media
         WHERE note_media._note = :id
     """)
-    abstract suspend fun getImages(id: Long): List<Image>
+    abstract fun getImages(id: Long): List<Image>
     @Query("""
         SELECT * FROM locations
         LEFT OUTER JOIN note_locations ON locations._id = note_locations._location
         WHERE note_locations._note = :id
     """)
-    abstract suspend fun getLocations(id: Long): List<Geolocation>
+    abstract fun getLocations(id: Long): List<Geolocation>
     @Query("""
         SELECT * FROM _metadata
         LEFT OUTER JOIN note_tags ON _metadata._id = note_tags._meta
         WHERE note_tags._note = :id
     """)
-    abstract suspend fun getTags(id: Long): List<MetaTag>
+    abstract fun getTags(id: Long): List<MetaTag>
 
     @Transaction
-    open suspend fun getBadgerNote(id: Long): BadgerNote? {
+    open fun getBadgerNote(id: Long): BadgerNote? {
         try {
             val note = getNote(id) ?: return null
             val images = getImages(id)
@@ -71,8 +80,8 @@ abstract class NoteDao : BaseDao<Note> {
         return null
     }
     @Transaction
-    open suspend fun getBadgerNote(note: Note): BadgerNote? {
-        val id = note.id ?: return null
+    open fun getBadgerNote(note: Note): BadgerNote? {
+        val id = note.id
         try {
             val images = getImages(id)
             val locations = getLocations(id)
@@ -84,14 +93,14 @@ abstract class NoteDao : BaseDao<Note> {
         return null
     }
     @Transaction
-    open suspend fun saveNote(
+    open fun saveNote(
         note: Note,
         images: List<Image>,
         locations: List<Geolocation>,
         tags: List<MetaTag>
     ): BadgerNote? {
         try {
-            if (note.id == null) {  // Create
+            if (note.id == 0L) {  // Create
                 val id = insert(note)
                 images.forEach {
                     val imageId = upsertMedia(it)
@@ -111,24 +120,24 @@ abstract class NoteDao : BaseDao<Note> {
                 note.id = id
             } else {                // Update
                 update(note)
-                val id = note.id!!
+                val id = note.id
                 images.forEach {
                     val imageId = upsertMedia(it)
-                    if (it.id == null) {
+                    if (it.id == 0L) {
                         insertNoteMedia(NoteMedia(id, imageId))
                         it.id = imageId
                     }
                 }
                 locations.forEach {
                     val locationId = upsertLocation(it)
-                    if (it.id == null) {
+                    if (it.id == 0L) {
                         insertNoteLocation(NoteLocation(id, locationId))
                         it.id = locationId
                     }
                 }
                 tags.forEach {
                     val tagId = upsertTag(it)
-                    if (it.id == null) {
+                    if (it.id == 0L) {
                         insertNoteTag(NoteTag(id, tagId))
                         it.id = tagId
                     }

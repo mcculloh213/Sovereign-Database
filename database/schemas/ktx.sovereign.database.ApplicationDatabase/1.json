@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "c9b460733e7e03a42547c0a51d8ee3f7",
+    "identityHash": "0ad595dad7e5d3c9d1ecceab33159247",
     "entities": [
       {
         "tableName": "content",
@@ -94,13 +94,13 @@
       },
       {
         "tableName": "locations",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `altitude` REAL NOT NULL, `_ts` INTEGER NOT NULL, `description` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `altitude` REAL NOT NULL, `_ts` INTEGER NOT NULL, `description` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "_id",
             "affinity": "INTEGER",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "latitude",
@@ -144,13 +144,13 @@
       },
       {
         "tableName": "images",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT, `_display_name` TEXT NOT NULL, `_path` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `_display_name` TEXT NOT NULL, `_path` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "_id",
             "affinity": "INTEGER",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "display",
@@ -264,13 +264,13 @@
       },
       {
         "tableName": "_metadata",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT, `_key` TEXT NOT NULL, `_value` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `_key` TEXT NOT NULL, `_value` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "_id",
             "affinity": "INTEGER",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "key",
@@ -296,13 +296,13 @@
       },
       {
         "tableName": "notes",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT, `title` TEXT NOT NULL, `body` TEXT NOT NULL, `is_favorite` INTEGER NOT NULL, `utc_created` INTEGER NOT NULL, `utc_updated` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `body` TEXT NOT NULL, `is_favorite` INTEGER NOT NULL, `utc_created` INTEGER NOT NULL, `utc_updated` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "_id",
             "affinity": "INTEGER",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "title",
@@ -647,7 +647,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c9b460733e7e03a42547c0a51d8ee3f7')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0ad595dad7e5d3c9d1ecceab33159247')"
     ]
   }
 }

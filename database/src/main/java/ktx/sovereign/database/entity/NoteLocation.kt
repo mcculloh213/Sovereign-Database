@@ -30,5 +30,5 @@ import ktx.sovereign.database.SchemaInfo
 )
 data class NoteLocation(
     @ColumnInfo(name = SchemaInfo.NoteLocation.Note) val note: Long,
-    @ColumnInfo(name = SchemaInfo.NoteLocation.Location) val media: Long
+    @ColumnInfo(name = SchemaInfo.NoteLocation.Location) val location: Long
 )

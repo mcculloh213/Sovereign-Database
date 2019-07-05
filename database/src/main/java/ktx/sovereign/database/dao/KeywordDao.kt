@@ -4,5 +4,5 @@ import androidx.room.Dao
 import ktx.sovereign.database.entity.Keyword
 
 @Dao
-interface KeywordDao : BaseDao<Keyword> {
+abstract class KeywordDao : BaseDao<Keyword>() {
 }

@@ -7,8 +7,8 @@ import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 import ktx.sovereign.database.SchemaInfo
 
-@Entity(tableName = SchemaInfo.Media.TableName)
 @Parcelize
+@Entity(tableName = SchemaInfo.Media.TableName)
 data class Media(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = SchemaInfo.Media.PrimaryKey) val id: Long,

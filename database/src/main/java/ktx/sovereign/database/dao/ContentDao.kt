@@ -4,5 +4,5 @@ import androidx.room.Dao
 import ktx.sovereign.database.entity.Content
 
 @Dao
-interface ContentDao : BaseDao<Content> {
+abstract class ContentDao {
 }

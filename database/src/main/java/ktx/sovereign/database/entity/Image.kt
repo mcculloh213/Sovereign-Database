@@ -8,18 +8,18 @@ import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 import ktx.sovereign.database.SchemaInfo
 
-@Entity(tableName = SchemaInfo.Image.TableName)
 @Parcelize
+@Entity(tableName = SchemaInfo.Image.TableName)
 data class Image (
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = SchemaInfo.Image.PrimaryKey) var id: Long?,
+    @ColumnInfo(name = SchemaInfo.Image.PrimaryKey) var id: Long,
     @ColumnInfo(name = SchemaInfo.Image.DisplayName) var display: String,
     @ColumnInfo(name = SchemaInfo.Image.Path) var path: String
 ) : Parcelable {
     @Ignore
     constructor()
-            : this(null, "", "")
+            : this(0, "", "")
     @Ignore
     constructor(display: String, path: String)
-            : this(null, display, path)
+            : this(0, display, path)
 }

@@ -8,11 +8,11 @@ import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 import ktx.sovereign.database.SchemaInfo
 
-@Entity(tableName = SchemaInfo.Note.TableName)
 @Parcelize
+@Entity(tableName = SchemaInfo.Note.TableName)
 data class Note(
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = SchemaInfo.Note.PrimaryKey) var id: Long? = null,
+    @ColumnInfo(name = SchemaInfo.Note.PrimaryKey) var id: Long,
     @ColumnInfo(name = SchemaInfo.Note.Title) var title: String,
     @ColumnInfo(name = SchemaInfo.Note.Body) var body: String,
     @ColumnInfo(name = SchemaInfo.Note.IsFavorite) var favorite: Boolean,
@@ -21,8 +21,8 @@ data class Note(
 ) : Parcelable {
     @Ignore
     constructor()
-            : this(null, "", "", false, -1, -1)
+            : this(0, "", "", false, -1, -1)
     @Ignore
     constructor(title: String, body: String, favorite: Boolean, created: Long, updated: Long)
-            : this(null, title, body, favorite, created, updated)
+            : this(0, title, body, favorite, created, updated)
 }

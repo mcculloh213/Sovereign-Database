@@ -8,18 +8,18 @@ import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 import ktx.sovereign.database.SchemaInfo
 
-@Entity(tableName = SchemaInfo.MetaTag.TableName)
 @Parcelize
+@Entity(tableName = SchemaInfo.MetaTag.TableName)
 data class MetaTag(
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = SchemaInfo.MetaTag.PrimaryKey) var id: Long?,
+    @ColumnInfo(name = SchemaInfo.MetaTag.PrimaryKey) var id: Long,
     @ColumnInfo(name = SchemaInfo.MetaTag.Key) var key: String,
     @ColumnInfo(name = SchemaInfo.MetaTag.Value) var value: String
 ) : Parcelable {
     @Ignore
     constructor()
-            : this(null, "", "")
+            : this(0, "", "")
     @Ignore
     constructor(key: String, value: String)
-            : this(null, key, value)
+            : this(0, key, value)
 }

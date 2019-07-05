@@ -5,8 +5,8 @@ import androidx.room.*
 import kotlinx.android.parcel.Parcelize
 import ktx.sovereign.database.SchemaInfo
 
-@Entity(tableName = SchemaInfo.Keyword.TableName)
 @Parcelize
+@Entity(tableName = SchemaInfo.Keyword.TableName)
 data class Keyword(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = SchemaInfo.Keyword.PrimaryKey) val id: Long,

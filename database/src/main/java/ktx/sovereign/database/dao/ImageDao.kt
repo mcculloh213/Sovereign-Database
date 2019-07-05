@@ -1,7 +1,9 @@
 package ktx.sovereign.database.dao
 
-import android.media.Image
+import androidx.room.Dao
+import ktx.sovereign.database.entity.Image
 
-interface ImageDao : BaseDao<Image> {
+@Dao
+abstract class ImageDao : BaseDao<Image>() {
 
 }

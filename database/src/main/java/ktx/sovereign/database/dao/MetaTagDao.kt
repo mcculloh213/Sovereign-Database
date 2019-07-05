@@ -4,5 +4,5 @@ import androidx.room.Dao
 import ktx.sovereign.database.entity.MetaTag
 
 @Dao
-interface MetaTagDao : BaseDao<MetaTag> {
+abstract class MetaTagDao : BaseDao<MetaTag>() {
 }
